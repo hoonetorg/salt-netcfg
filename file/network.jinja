@@ -1,0 +1,7 @@
+{% if enabled is defined and enabled %}NETWORKING="yes"
+{%endif%}{% if hostname is defined and hostname %}HOSTNAME={{hostname}}
+{%endif%}{% if gateway is defined and gateway %}GATEWAY={{gateway}}
+{%endif%}{% if gatewaydev is defined and gatewaydev %}GATEWAYDEV={{gatewaydev}}
+{%endif%}{% if nisdomain is defined and nisdomain %}NISDOMAIN={{nisdomain}}
+{%endif%}{% if nozeroconf is defined and nozeroconf %}NOZEROCONF="yes"
+{%endif%}

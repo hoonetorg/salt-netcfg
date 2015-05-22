@@ -1,0 +1,5 @@
+{% if domain is defined and domain != "" %}domain {{ domain[0] }}
+search {{ domain|join(' ') }}
+{%endif%}{% if dns is defined and dns %}{% for server in dns -%}
+nameserver {{server}}
+{% endfor -%}{%endif%}

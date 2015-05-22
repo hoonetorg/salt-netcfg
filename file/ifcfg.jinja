@@ -1,0 +1,38 @@
+DEVICE={{iface}}
+{% if addr is defined and addr != "" %}HWADDR={{addr}}
+{%endif%}{% if type is defined and type != "" %}TYPE={{type}}
+{%endif%}{% if delay is defined and delay != "" %}DELAY={{delay}}
+{%endif%}{% if stp is defined and stp != "" %}STP={{stp}}
+{%endif%}{% if userctl is defined and userctl %}USERCTL=yes
+{%endif%}{% if type is defined and type == "Bond" %}BONDING_MASTER=yes
+{%endif%}{% if master is defined and master != "" %}MASTER={{master}}
+SLAVE=yes
+{%endif%}{% if vlan is defined and vlan %}VLAN=yes
+{%endif%}{% if bridge is defined and bridge != "" %}BRIDGE={{bridge}}
+{%endif%}{% if enabled is defined and enabled %}ONBOOT=yes
+{%endif%}{% if onparent is defined and onparent %}ONPARENT=yes
+{%endif%}{% if ipaddr is defined and ipaddr != "" %}IPADDR={{ipaddr}}
+{%endif%}{% if ipaddrs is defined and ipaddrs %}{% for ipaddr in ipaddrs -%}
+IPADDR{{loop.index - 1}}={{ipaddr}}
+{% endfor -%}{%endif%}{% if srcaddr is defined and srcaddr != "" %}SRCADDR={{srcaddr}}
+{%endif%}{% if netmask is defined and netmask != "" %}NETMASK={{netmask}}
+{%endif%}{% if netmasks is defined and netmasks %}{% for netmask in netmasks -%}
+NETMASK{{loop.index - 1}}={{netmask}}
+{% endfor -%}{%endif%}{% if gateway is defined and gateway != "" %}GATEWAY={{gateway}}
+{%endif%}{% if enable_ipv6 is defined and enable_ipv6 %}IPV6INIT=yes
+{% if ipv6_autoconf is defined and ipv6_autoconf %}IPV6_AUTOCONF=yes
+{%endif%}{% if ipv6addr is defined and ipv6addr != "" %}IPV6ADDR={{ipv6addr}}
+{%endif%}{% if ipv6gateway is defined and ipv6gateway != "" %}IPV6_DEFAULTGW={{ipv6gateway}}
+{%endif%}{%endif%}{% if my_inner_ipaddr is defined and my_inner_ipaddr != "" %}MY_INNER_IPADDR={{my_inner_ipaddr}}
+{%endif%}{% if my_outer_ipaddr is defined and my_outer_ipaddr != "" %}MY_OUTER_IPADDR={{my_outer_ipaddr}}
+{%endif%}{%if bonding_opts is defined and bonding_opts %}BONDING_OPTS='{%for item in bonding_opts %}{{item}}={{bonding_opts[item]}} {%endfor%}'
+{%endif%}{% if proto is defined and proto != ""  %}BOOTPROTO={{proto}}
+{%endif%}{%if mtu is defined and mtu != "" %}MTU={{ mtu }}
+{%endif%}{% if defroute is defined and defroute %}DEFROUTE=yes
+{%endif%}{% if ethtool_opts is defined and ethtool_opts %}ETHTOOL_OPTS='{%for item in ethtool_opts %}{{item}} {{ethtool_opts[item]}} {%endfor%}'
+{%endif%}{% if nm_controlled is not defined %}NM_CONTROLLED=no
+{%endif%}{% if hotplug is defined and hotplug != "" %}HOTPLUG={{hotplug}}
+{%endif%}{% if peerdns is defined and peerdns %}PEERDNS=yes
+{% if domain is defined and domain != "" %}DOMAIN="{{ domain|join(' ') }}"
+{%endif%}{%- if dns is defined and dns -%}{%- for server in dns -%}DNS{{loop.index}}={{server}}
+{% endfor -%}{%- endif-%}{%- endif-%}
