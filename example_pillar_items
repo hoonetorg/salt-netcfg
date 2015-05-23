@@ -1,0 +1,170 @@
+    netcfg:
+        ----------
+        file:
+            ----------
+            managed:
+                ----------
+                i0fa0:
+                    ----------
+                    addr:
+                        xx:xx:xx:xx:xx:xa
+                    enabled:
+                        True
+                    master:
+                        bond0
+                    mtu:
+                        9000
+                i0fa1:
+                    ----------
+                    addr:
+                        xx:xx:xx:xx:xx:xb
+                    enabled:
+                        True
+                    master:
+                        bond0
+                    mtu:
+                        9000
+                bond0:
+                    ----------
+                    bonding_opts:
+                        ----------
+                        downdelay:
+                            200
+                        miimon:
+                            100
+                        mode:
+                            active-backup
+                        updelay:
+                            0
+                    bridge:
+                        br0
+                    enabled:
+                        True
+                    mtu:
+                        9000
+                    vlannumbers:
+                        - 2
+                        - 3
+                        - 4
+                        - 21
+                        - 22
+                        - 23
+                        - 24
+                        - 25
+                        - 26
+                        - 27
+                        - 28
+                        - 29
+                    vlanparams:
+                        ----------
+                        basebridge:
+                            br0
+                        enabled:
+                            True
+                        mtu:
+                            9000
+                bond0.11:
+                    ----------
+                    bridge:
+                        br0vl11
+                    enabled:
+                        True
+                    mtu:
+                        9000
+                    vlan:
+                        True
+                br0:
+                    ----------
+                    defroute:
+                        True
+                    delay:
+                        0
+                    enabled:
+                        True
+                    gateway:
+                        192.168.1.254
+                    hotplug:
+                        'no'
+                    ipaddr:
+                        192.168.1.21
+                    mtu:
+                        9000
+                    netmask:
+                        255.255.255.0
+                    peerdns:
+                        False
+                    proto:
+                        none
+                    stp:
+                        'off'
+                    type:
+                        Bridge
+                    vlannumbers:
+                        - 2
+                        - 3
+                        - 4
+                        - 21
+                        - 22
+                        - 23
+                        - 24
+                        - 25
+                        - 26
+                        - 27
+                        - 28
+                        - 29
+                    vlanparams:
+                        ----------
+                        delay:
+                            0
+                        enabled:
+                            True
+                        mtu:
+                            9000
+                        type:
+                            Bridge
+                br0vl11:
+                    ----------
+                    delay:
+                        0
+                    enabled:
+                        True
+                    hotplug:
+                        'no'
+                    ipaddr:
+                        172.0.0.21
+                    mtu:
+                        9000
+                    netmask:
+                        255.255.255.0
+                    peerdns:
+                        False
+                    proto:
+                        none
+                    stp:
+                        'off'
+                    type:
+                        Bridge
+            resolv_conf:
+                ----------
+                dns:
+                    - 192.168.1.253
+                    - 192.168.1.254
+                domain:
+                    - a-domain.net
+            slsrequires:
+                |_
+                  ----------
+                  sls:
+                      repoconf
+            system:
+                ----------
+                enabled:
+                    True
+                hostname:
+                    a-server.a-domain.net
+                nozeroconf:
+                    True
+                require_reboot:
+                    True
+                use_networkmanager:
+                    False
