@@ -28,49 +28,49 @@ Applying the pillar items shown in file example_pillar_items to a server:
 
 - would create these network-files
 
-/etc/resolv.conf
-/etc/sysconfig/network
-/etc/sysconfig/network-scripts/ifcfg-bond0
-/etc/sysconfig/network-scripts/ifcfg-bond0.11
-/etc/sysconfig/network-scripts/ifcfg-bond0.12
-/etc/sysconfig/network-scripts/ifcfg-bond0.13
-/etc/sysconfig/network-scripts/ifcfg-bond0.14
-/etc/sysconfig/network-scripts/ifcfg-bond0.2
-/etc/sysconfig/network-scripts/ifcfg-bond0.21
-/etc/sysconfig/network-scripts/ifcfg-bond0.22
-/etc/sysconfig/network-scripts/ifcfg-bond0.23
-/etc/sysconfig/network-scripts/ifcfg-bond0.24
-/etc/sysconfig/network-scripts/ifcfg-bond0.25
-/etc/sysconfig/network-scripts/ifcfg-bond0.26
-/etc/sysconfig/network-scripts/ifcfg-bond0.27
-/etc/sysconfig/network-scripts/ifcfg-bond0.28
-/etc/sysconfig/network-scripts/ifcfg-bond0.29
-/etc/sysconfig/network-scripts/ifcfg-bond0.3
-/etc/sysconfig/network-scripts/ifcfg-bond0.4
-/etc/sysconfig/network-scripts/ifcfg-br0
-/etc/sysconfig/network-scripts/ifcfg-br0vl11
-/etc/sysconfig/network-scripts/ifcfg-br0vl12
-/etc/sysconfig/network-scripts/ifcfg-br0vl13
-/etc/sysconfig/network-scripts/ifcfg-br0vl14
-/etc/sysconfig/network-scripts/ifcfg-br0vl2
-/etc/sysconfig/network-scripts/ifcfg-br0vl21
-/etc/sysconfig/network-scripts/ifcfg-br0vl22
-/etc/sysconfig/network-scripts/ifcfg-br0vl23
-/etc/sysconfig/network-scripts/ifcfg-br0vl24
-/etc/sysconfig/network-scripts/ifcfg-br0vl25
-/etc/sysconfig/network-scripts/ifcfg-br0vl26
-/etc/sysconfig/network-scripts/ifcfg-br0vl27
-/etc/sysconfig/network-scripts/ifcfg-br0vl28
-/etc/sysconfig/network-scripts/ifcfg-br0vl29
-/etc/sysconfig/network-scripts/ifcfg-br0vl3
-/etc/sysconfig/network-scripts/ifcfg-br0vl4
-/etc/sysconfig/network-scripts/ifcfg-i0fa0
-/etc/sysconfig/network-scripts/ifcfg-i0fa1
+  - /etc/resolv.conf
+  - /etc/sysconfig/network
+  - /etc/sysconfig/network-scripts/ifcfg-bond0
+  - /etc/sysconfig/network-scripts/ifcfg-bond0.11
+  - /etc/sysconfig/network-scripts/ifcfg-bond0.12
+  - /etc/sysconfig/network-scripts/ifcfg-bond0.13
+  - /etc/sysconfig/network-scripts/ifcfg-bond0.14
+  - /etc/sysconfig/network-scripts/ifcfg-bond0.2
+  - /etc/sysconfig/network-scripts/ifcfg-bond0.21
+  - /etc/sysconfig/network-scripts/ifcfg-bond0.22
+  - /etc/sysconfig/network-scripts/ifcfg-bond0.23
+  - /etc/sysconfig/network-scripts/ifcfg-bond0.24
+  - /etc/sysconfig/network-scripts/ifcfg-bond0.25
+  - /etc/sysconfig/network-scripts/ifcfg-bond0.26
+  - /etc/sysconfig/network-scripts/ifcfg-bond0.27
+  - /etc/sysconfig/network-scripts/ifcfg-bond0.28
+  - /etc/sysconfig/network-scripts/ifcfg-bond0.29
+  - /etc/sysconfig/network-scripts/ifcfg-bond0.3
+  - /etc/sysconfig/network-scripts/ifcfg-bond0.4
+  - /etc/sysconfig/network-scripts/ifcfg-br0
+  - /etc/sysconfig/network-scripts/ifcfg-br0vl11
+  - /etc/sysconfig/network-scripts/ifcfg-br0vl12
+  - /etc/sysconfig/network-scripts/ifcfg-br0vl13
+  - /etc/sysconfig/network-scripts/ifcfg-br0vl14
+  - /etc/sysconfig/network-scripts/ifcfg-br0vl2
+  - /etc/sysconfig/network-scripts/ifcfg-br0vl21
+  - /etc/sysconfig/network-scripts/ifcfg-br0vl22
+  - /etc/sysconfig/network-scripts/ifcfg-br0vl23
+  - /etc/sysconfig/network-scripts/ifcfg-br0vl24
+  - /etc/sysconfig/network-scripts/ifcfg-br0vl25
+  - /etc/sysconfig/network-scripts/ifcfg-br0vl26
+  - /etc/sysconfig/network-scripts/ifcfg-br0vl27
+  - /etc/sysconfig/network-scripts/ifcfg-br0vl28
+  - /etc/sysconfig/network-scripts/ifcfg-br0vl29
+  - /etc/sysconfig/network-scripts/ifcfg-br0vl3
+  - /etc/sysconfig/network-scripts/ifcfg-br0vl4
+  - /etc/sysconfig/network-scripts/ifcfg-i0fa0
+  - /etc/sysconfig/network-scripts/ifcfg-i0fa1
 
 
 - disable NetworkManager
 - enable legacy network
-- reboot on initial salt run (as long as grains.get('netcfg_file__initial_run') != 'successful')
+- reboot on initial salt run (as long as <grains.get('netcfg_file__initial_run') != 'successful'>)
   - because network interfaces after Kickstart installation usually have names like eth0, en0ps1 ...
   - they cannot be renamed once activated (rename eth0 to i0fa0 will fail during initial run)
   -> reboot needed
