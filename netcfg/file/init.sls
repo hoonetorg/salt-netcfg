@@ -64,9 +64,9 @@ netcfg_file__file_/etc/sysconfig/network:
 
 {% set hostname = salt['pillar.get']('netcfg:file:hostname', '') %}
 {% if hostname is defined and hostname != '' %}
-netcfg_file__file_/etc/hosts:
+netcfg_file__file_/etc/hostname:
   file.managed:
-    - name: /etc/hosts
+    - name: /etc/hostname
     - contents: {{hostname}}
     - contents_newline: False
     - user: root
