@@ -1,14 +1,11 @@
-netcfg_file__pkg_bridge-utils:
+{% from "netcfg/map.jinja" import netcfg with context %}
+
+{% if netcfg.netcfgpackages is defined and netcfg.netcfgpackages != [] %}
+netcfg_file__netcfgpackages:
   pkg.installed:
-    - name: bridge-utils
+    - pkgs: {{netcfg.netcfgpackages}}
     - watch_in: 
       - service: netcfg_file__service_networkrunning
-{% set slsrequires =salt['pillar.get']('netcfg:file:slsrequires', False) %}
-{% if slsrequires is defined and slsrequires %}
-    - require:
-{% for slsrequire in slsrequires %}
-      - {{slsrequire}}
-{% endfor %}
 {% endif %}
 
 {% set use_networkmanager = salt['pillar.get']('netcfg:file:system:use_networkmanager', True) %}
@@ -26,15 +23,11 @@ netcfg_file__service_networkdisabled:
     - name: {{servicenetworkdisabled}}
     - watch_in: 
       - service: netcfg_file__service_networkrunning
-    - require:
-      - pkg: netcfg_file__pkg_bridge-utils
 netcfg_file__service_networkdead:
   service.dead:
     - name: {{servicenetworkdisabled}}
     - watch_in: 
       - service: netcfg_file__service_networkrunning
-    - require:
-      - pkg: netcfg_file__pkg_bridge-utils
 {% endif %}
 
 
@@ -48,8 +41,6 @@ netcfg_file__file_/etc/resolv.conf:
     - group: root
     - mode: 644
     - template: jinja
-    - require:
-      - pkg: netcfg_file__pkg_bridge-utils
     - context:
       {% for param, value in resolv_conf.items() %}
       {{ param }}: {{ value }}
@@ -66,8 +57,6 @@ netcfg_file__file_/etc/sysconfig/network:
     - template: jinja
     - watch_in:
       - service: netcfg_file__service_networkrunning
-    - require:
-      - pkg: netcfg_file__pkg_bridge-utils
     - context:
       {% for param, value in salt['pillar.get']('netcfg:file:system', {}).items() %}
       {{ param }}: {{ value }}
@@ -84,8 +73,6 @@ netcfg_file__file_/etc/sysconfig/network-scripts/ifcfg-{{managedif}}:
     - template: jinja
     - watch_in:
       - service: netcfg_file__service_networkrunning
-    - require:
-      - pkg: netcfg_file__pkg_bridge-utils
     - context:
       iface: {{managedif}}
       {% for param, value in managedifdata.items() %}
@@ -111,8 +98,6 @@ netcfg_file__file_/etc/sysconfig/network-scripts/ifcfg-{{managedif}}.{{vlannumbe
     - template: jinja
     - watch_in:
       - service: netcfg_file__service_networkrunning
-    - require:
-      - pkg: netcfg_file__pkg_bridge-utils
     - context:
       {% if managedifdata.vlanparams.type is defined and managedifdata.vlanparams.type == "Bridge" %}
       iface: {{managedif}}vl{{vlannumber}}
@@ -133,8 +118,6 @@ netcfg_file__file_/etc/sysconfig/network-scripts/ifcfg-{{managedif}}.{{vlannumbe
 netcfg_file__service_networkenabled:
   service.enabled:
     - name: {{servicenetworkenabled}}
-    - require:
-      - pkg: netcfg_file__pkg_bridge-utils
 
 {% if grains.get('netcfg_file__initial_run') != 'successful' %}
 
@@ -144,7 +127,6 @@ netcfg_file__initial_run_successful:
     - key: netcfg_file__initial_run
     - val: successful
     - require:
-      - pkg: netcfg_file__pkg_bridge-utils
       - service: netcfg_file__service_networkenabled
 
 netcfg_file__system_reboot:
@@ -164,7 +146,5 @@ netcfg_file__service_networkrunning:
 netcfg_file__service_networkrunning:
   service.running:
     - name: {{servicenetworkenabled}}
-    - require:
-      - pkg: netcfg_file__pkg_bridge-utils
 
 {% endif %}
