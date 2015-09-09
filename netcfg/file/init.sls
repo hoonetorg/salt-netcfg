@@ -68,7 +68,6 @@ netcfg_file__file_/etc/hostname:
   file.managed:
     - name: /etc/hostname
     - contents: {{hostname}}
-    - contents_newline: False
     - user: root
     - group: root
     - mode: "0644"
