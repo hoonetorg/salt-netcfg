@@ -1,0 +1,11 @@
+{% set netcfg = salt['grains.filter_by']({
+  'Debian': {
+    'netcfgpackages': [ ],
+  },
+  'RedHat': {
+    'netcfgpackages': [ ],
+  },
+  'default': {
+    'netcfgpackages': [ ],
+  },
+}, merge=salt['pillar.get']('netcfg:lookup')) %}
