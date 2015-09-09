@@ -62,6 +62,21 @@ netcfg_file__file_/etc/sysconfig/network:
       {{ param }}: {{ value }}
       {% endfor %}
 
+{% set hostname = salt['pillar.get']('netcfg:file:hostname', '') %}
+{% if hostname is defined and hostname != '' %}
+netcfg_file__file_/etc/hosts:
+  file.managed:
+    - name: /etc/hosts
+    - contents: {{hostname}}
+    - contents_newline: False
+    - user: root
+    - group: root
+    - mode: "0644"
+    - watch_in:
+      - service: netcfg_file__service_networkrunning
+{% endif %}
+
+
 {% for managedif, managedifdata in salt['pillar.get']('netcfg:file:managed', {}).items() %}
 netcfg_file__file_/etc/sysconfig/network-scripts/ifcfg-{{managedif}}:
   file.managed:
