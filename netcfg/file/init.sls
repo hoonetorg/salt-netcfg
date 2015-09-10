@@ -61,9 +61,11 @@ netcfg_file__file_/etc/sysconfig/network:
       {% for param, value in salt['pillar.get']('netcfg:file:system', {}).items() %}
       {{ param }}: {{ value }}
       {% endfor %}
-
 {% set hostname = salt['pillar.get']('netcfg:file:hostname', '') %}
 {% if hostname is defined and hostname != '' %}
+{% if grains['os_family'] == "RedHat" and grains['osmajorrelease'] < 7 %}
+      hostname: {{hostname}}
+{% else %}
 netcfg_file__file_/etc/hostname:
   file.managed:
     - name: /etc/hostname
@@ -73,6 +75,7 @@ netcfg_file__file_/etc/hostname:
     - mode: "0644"
     - watch_in:
       - service: netcfg_file__service_networkrunning
+{% endif %}
 {% endif %}
 
 
