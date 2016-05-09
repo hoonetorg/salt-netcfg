@@ -36,4 +36,5 @@ NETMASK{{loop.index - 1}}={{netmask}}
 {%endif%}{% if peerdns is defined and peerdns %}PEERDNS=yes
 {% if domain is defined and domain != "" %}DOMAIN="{{ domain|join(' ') }}"
 {%endif%}{%- if dns is defined and dns -%}{%- for server in dns -%}DNS{{loop.index}}={{server}}
-{% endfor -%}{%- endif-%}{%- endif-%}
+{% endfor -%}{%- endif-%}{%- else-%}PEERDNS=no
+{%- endif-%}
