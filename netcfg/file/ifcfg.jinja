@@ -10,6 +10,7 @@ SLAVE=yes
 {%endif%}{% if vlan is defined and vlan %}VLAN=yes
 {%endif%}{% if bridge is defined and bridge != "" %}BRIDGE={{bridge}}
 {%endif%}{% if enabled is defined and enabled %}ONBOOT=yes
+{%else%}ONBOOT=no
 {%endif%}{% if onparent is defined and onparent %}ONPARENT=yes
 {%endif%}{% if ipaddr is defined and ipaddr != "" %}IPADDR={{ipaddr}}
 {%endif%}{% if ipaddrs is defined and ipaddrs %}{% for ipaddr in ipaddrs -%}
