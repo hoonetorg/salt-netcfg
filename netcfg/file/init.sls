@@ -79,7 +79,7 @@ netcfg_file__file_/etc/hostname:
 {% endif %}
 
 
-{% for managedif, managedifdata in salt['pillar.get']('netcfg:file:managed', {}).items() %}
+{% for managedif, managedifdata in salt['pillar.get']('netcfg:file:managed', {}).items()|sort %}
 netcfg_file__file_/etc/sysconfig/network-scripts/ifcfg-{{managedif}}:
   file.managed:
     - name: /etc/sysconfig/network-scripts/ifcfg-{{managedif}}
