@@ -31,8 +31,8 @@ NETMASK{{loop.index - 1}}={{netmask}}
 {%endif%}{%if mtu is defined and mtu != "" %}MTU={{ mtu }}
 {%endif%}{% if defroute is defined and defroute %}DEFROUTE=yes
 {%endif%}{% if ethtool_opts is defined and ethtool_opts %}ETHTOOL_OPTS='{%for item in ethtool_opts %}{{item}} {{ethtool_opts[item]}} {%endfor%}'
-{%endif%}{% if nm_controlled is not defined %}NM_CONTROLLED=no
-{%else%}NM_CONTROLLED=yes
+{%endif%}{% if nm_controlled is defined and nm_controlled %}NM_CONTROLLED=yes
+{%else%}NM_CONTROLLED=no
 {%endif%}{% if hotplug is defined and hotplug != "" %}HOTPLUG={{hotplug}}
 {%endif%}{% if zone is defined and zone != "" %}ZONE={{zone}}
 {%endif%}{% if peerdns is defined and peerdns %}PEERDNS=yes
